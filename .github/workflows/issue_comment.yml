@@ -22,7 +22,7 @@ jobs:
           username: root
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
-          script: whoami
+          script: ip addr
 
       - name: Go to working directory
         run: cd /var/www/backend/BioVatika-Backend
