@@ -29,4 +29,7 @@ jobs:
       #   shell: bash
 
       - name: git pull latest code
-        script: git pull 
+        run: |
+          pwd
+          git pull
+
