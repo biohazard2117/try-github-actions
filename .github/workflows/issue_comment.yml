@@ -23,9 +23,9 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-          ip addr
-          cd /var/www/backend/BioVatika-Backend
-          pwd
+            ip addr
+            cd /var/www/backend/BioVatika-Backend
+            pwd
 
       # - name: Go to working directory
       #   run: cd /var/www/backend/BioVatika-Backend
