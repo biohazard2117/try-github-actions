@@ -1,23 +1,20 @@
-name: Create a comment on new issues
+# name: Create a comment on new issues
 
-on:
-  push:
-    branches: 
-      - main
-  pull_request:
-    branches: 
-      - main
-  workflow_dispatch:
+# on:
+#   workflow_run:
+#     workflows: ["Hellow world workflow"]
+#     types:
+#       - completed
 
 
-jobs:
-  deploy to server:
-    runs-on: ubuntu-latest
-    steps:
-      - name: "SSH into DigitalOcean Droplet"
-        uses: appleboy/ssh-action@v0.1.8
-        with:
-          host: 178.128.198.31
-          username: root
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
+# jobs:
+#   deploy to server:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: "SSH into DigitalOcean Droplet"
+#         uses: appleboy/ssh-action@v0.1.8
+#         with:
+#           host: 178.128.198.31
+#           username: root
+#           key: ${{ secrets.SSH_PRIVATE_KEY }}
+#           port: 22
