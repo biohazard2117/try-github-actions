@@ -15,6 +15,12 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
+
+      - name: Set up SSH key
+        uses: webfactory/ssh-agent@v0.5.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
       - name: SSH into DigitalOcean Droplet
         uses: appleboy/ssh-action@v0.1.8
         with:
@@ -25,7 +31,7 @@ jobs:
           script: |
             cd /var/www/backend/BioVatika-Backend
             ls
-      # git pull https://biohazard2117:${{secrets.ACCESS_TOKEN}}@github.com
+            git pull 
 
       # - name: Go to working directory
       #   run: cd /var/www/backend/BioVatika-Backend
