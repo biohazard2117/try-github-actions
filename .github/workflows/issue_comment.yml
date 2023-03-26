@@ -22,15 +22,11 @@ jobs:
           username: root
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
-          script: |
-            ip addr
-            cd /var/www/backend/BioVatika-Backend
-            pwd
+          script: cd /var/www/backend/BioVatika-Backend
 
       # - name: Go to working directory
       #   run: cd /var/www/backend/BioVatika-Backend
       #   shell: bash
 
-      # - name: git pull latest code
-      #   run: git pull 
-      #   shell: bash
+      - name: git pull latest code
+        script: git pull 
