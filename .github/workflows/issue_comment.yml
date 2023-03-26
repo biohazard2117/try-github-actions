@@ -1,25 +1,20 @@
 name: Create a comment on new issues
 
 on:
-  issues:
-    types: [opened]
+  workflow_run:
+    workflows: ["Hellow world workflow"]
+    types:
+      - completed
+
 
 jobs:
-  comment-with-actions:
+  deploy to server:
     runs-on: ubuntu-latest
     steps:
-      - name: "dump github context"
-        run: echo '${{ toJSON(github.event)}}' | jq
-        shell: bash
-
-      - name: Create comment
-        uses: peter-evans/create-or-update-comment@v2
+      - name: "SSH into DigitalOcean Droplet"
+        uses: appleboy/ssh-action@master
         with:
-          issue-number: '${{(github.event.issue.number)}}'
-          body: |
-            This is a multi-line test comment
-            - With GitHub **Markdown** :sparkles:
-            - Created by [create-or-update-comment][1]
-
-            [1]: https://github.com/peter-evans/create-or-update-comment
-          reactions: '+1'
+          host: 178.128.198.31
+          username: root
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
