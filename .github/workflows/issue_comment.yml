@@ -1,10 +1,13 @@
 name: Create a comment on new issues
 
 on:
-  workflow_run:
-    workflows: ["Hellow world workflow"]
-    types:
-      - completed
+  push:
+    branches: 
+      - main
+  pull_request:
+    branches: 
+      - main
+  workflow_dispatch:
 
 
 jobs:
