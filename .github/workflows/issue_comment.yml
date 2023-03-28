@@ -24,10 +24,10 @@ jobs:
           port: 22
           script: |
             cd /var/www/backend/BioVatika-Backend
-            git pull https://${{secrets.USERNAME_GITHUB}}:${{secrets.ACCESS_TOKEN}}@github.com/Relish-Repo/BioVatika-Backend.git
+            git pull origin develop https://${{secrets.USERNAME_GITHUB}}:${{secrets.ACCESS_TOKEN}}@github.com/Relish-Repo/BioVatika-Backend.git
             source ../venv/bin/activate
             pip install -r "requirements.txt"
-            python manage.py migrate
+            python3 manage.py migrate
             sudo systemctl restart gunicorn
             sudo systemctl daemon-reload
             sudo systemctl restart gunicorn.socket gunicorn.service
