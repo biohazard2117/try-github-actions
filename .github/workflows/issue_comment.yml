@@ -15,7 +15,6 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-
       - name: SSH into DigitalOcean Droplet
         uses: appleboy/ssh-action@v0.1.8
         with:
