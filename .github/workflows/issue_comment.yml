@@ -31,8 +31,12 @@ jobs:
           script: |
             cd /var/www/backend/BioVatika-Backend
             ls
-            git pull https://biohazard2117:${{secrets.ACCESS_TOKEN}}@github.com/Relish-Repo/BioVatika-Backend.git
+            sudo systemctl restart gunicorn
+            sudo systemctl daemon-reload
+            sudo systemctl restart gunicorn.socket gunicorn.service
+            sudo nginx -t && sudo systemctl restart nginx
 
+      # git pull https://biohazard2117:${{secrets.ACCESS_TOKEN}}@github.com/Relish-Repo/BioVatika-Backend.git
       # - name: Go to working directory
       #   run: cd /var/www/backend/BioVatika-Backend
       #   shell: bash
