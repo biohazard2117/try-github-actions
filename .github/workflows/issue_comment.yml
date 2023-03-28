@@ -15,7 +15,7 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      - name: SSH into DigitalOcean Droplet
+      - name: SSH into Droplet & Git pull & restart Droplet
         uses: appleboy/ssh-action@v0.1.8
         with:
           host: ${{secrets.SERVER_IP}}
