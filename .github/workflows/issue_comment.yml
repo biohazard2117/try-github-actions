@@ -18,25 +18,14 @@ jobs:
       - name: SSH into DigitalOcean Droplet
         uses: appleboy/ssh-action@v0.1.8
         with:
-          host: 178.128.198.31
-          username: root
+          host: ${{secrets.SERVER_IP}}
+          username: ${{secrets.SERVER_USERNAME}}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
             cd /var/www/backend/BioVatika-Backend
-            ls
+            git pull https://${{secrets.USERNAME_GITHUB}}:${{secrets.ACCESS_TOKEN}}@github.com/Relish-Repo/BioVatika-Backend.git
             sudo systemctl restart gunicorn
             sudo systemctl daemon-reload
             sudo systemctl restart gunicorn.socket gunicorn.service
             sudo nginx -t && sudo systemctl restart nginx
-
-      # git pull https://biohazard2117:${{secrets.ACCESS_TOKEN}}@github.com/Relish-Repo/BioVatika-Backend.git
-      # - name: Go to working directory
-      #   run: cd /var/www/backend/BioVatika-Backend
-      #   shell: bash
-
-      # - name: git pull latest code
-      #   run: |
-      #     pwd
-      #     git pull
-
