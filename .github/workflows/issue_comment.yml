@@ -1,25 +1,35 @@
-name: Create a comment on new issues
+# name: Create a comment on new issues
 
-on:
-  issues:
-    types: [opened]
+# on:
+#   push:
+#     branches: 
+#       - main
+#   pull_request:
+#     branches: 
+#       - main
+#   workflow_dispatch:
 
-jobs:
-  comment-with-actions:
-    runs-on: ubuntu-latest
-    steps:
-      - name: "dump github context"
-        run: echo '${{ toJSON(github.event)}}' | jq
-        shell: bash
 
-      - name: Create comment
-        uses: peter-evans/create-or-update-comment@v2
-        with:
-          issue-number: '${{(github.event.issue.number)}}'
-          body: |
-            This is a multi-line test comment
-            - With GitHub **Markdown** :sparkles:
-            - Created by [create-or-update-comment][1]
-
-            [1]: https://github.com/peter-evans/create-or-update-comment
-          reactions: '+1'
+# jobs:
+#   build: 
+#     name: Build
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: SSH into Droplet & Git pull & restart Droplet
+#         uses: appleboy/ssh-action@v0.1.8
+#         with:
+#           host: ${{secrets.SERVER_IP}}
+#           username: ${{secrets.SERVER_USERNAME}}
+#           key: ${{ secrets.SSH_PRIVATE_KEY }}
+#           port: 22
+#           script: |
+#             cd /var/www/backend/BioVatika-Backend
+#             pwd
+#             git pull https://${{secrets.USERNAME_GITHUB}}:${{secrets.ACCESS_TOKEN}}@github.com/Relish-Repo/BioVatika-Backend.git develop
+#             source ../venv/bin/activate
+#             pip install -r "requirements.txt"
+#             python3 manage.py migrate
+#             sudo systemctl restart gunicorn
+#             sudo systemctl daemon-reload
+#             sudo systemctl restart gunicorn.socket gunicorn.service
+#             sudo nginx -t && sudo systemctl restart nginx
