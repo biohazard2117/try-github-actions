@@ -51,12 +51,13 @@ jobs:
         uses: easingthemes/ssh-deploy@main
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          # SOURCE: "dist/"
+          # SOURCE: "./build/"
           REMOTE_HOST: 143.110.146.79
           REMOTE_USER: root
-          # TARGET: ${{ secrets.REMOTE_TARGET }}
+          # TARGET: /var/www/html/
           # EXCLUDE: "/dist/, /node_modules/"
           SCRIPT_BEFORE: |
             whoami
           SCRIPT_AFTER: |
+            cd /var/www/html/
             ls
