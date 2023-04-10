@@ -60,4 +60,4 @@ jobs:
             whoami
           SCRIPT_AFTER: |
             cd /var/www/html/
-            ls
+            pwd
