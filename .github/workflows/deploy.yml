@@ -22,15 +22,15 @@ jobs:
     # - name: Copy files to Droplet
     #   run: scp -r -i ${{ secrets.SSH_PRIVATE_KEY }} ./build/* <USERNAME>@<DROPLET_IP_ADDRESS>:/var/www/html/
 
-    # - name: Restart Apache
-    #   run: ssh -i ${{ secrets.SSH_PRIVATE_KEY }} root@143.110.146.79 "ls"
+    - name: Restart Apache
+      run: ssh -i ${{ secrets.SSH_PRIVATE_KEY }} root@143.110.146.79 "ls"
     
-      - name: SSH into Droplet & Git pull & restart Droplet
-        uses: appleboy/ssh-action@v0.1.8
-        with:
-          host: 143.110.146.79
-          username: root
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
-          script: |
-            ls
+      # - name: SSH into Droplet & Git pull & restart Droplet
+      #   uses: appleboy/ssh-action@v0.1.8
+      #   with:
+      #     host: 143.110.146.79
+      #     username: root
+      #     key: ${{ secrets.SSH_PRIVATE_KEY }}
+      #     port: 22
+      #     script: |
+      #       ls
