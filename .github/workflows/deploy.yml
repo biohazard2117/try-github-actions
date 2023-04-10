@@ -26,21 +26,6 @@ jobs:
     - name: Run build task
       run: npm run build --if-present
 
-
-
-    # - name: Restart Apache
-    #   run: ssh -i ${{ secrets.SSH_PRIVATE_KEY }} root@143.110.146.79 "ls"
-    
-    # - name: SSH into Droplet & Git pull & restart Droplet
-    #   uses: appleboy/ssh-action@v0.1.8
-    #   with:
-    #     host: 143.110.146.79
-    #     username: root
-    #     key: ${{ secrets.SSH_PRIVATE_KEY }}
-    #     port: 22
-    #     script: |
-    #       ls
-
     - name: Deploy to Staging server
       uses: easingthemes/ssh-deploy@main
       env:
@@ -49,9 +34,5 @@ jobs:
         REMOTE_HOST: 143.110.146.79
         REMOTE_USER: root
         TARGET: /var/www/test/
-        # EXCLUDE: "/dist/, /node_modules/"
-        # SCRIPT_BEFORE: |
-        #   whoami
-        # SCRIPT_AFTER: |
-        #   cd /var/www/html/
-        #   pwd
+        SCRIPT_AFTER: |
+          sudo nginx -t && sudo systemctl restart nginx
