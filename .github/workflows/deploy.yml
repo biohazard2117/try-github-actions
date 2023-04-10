@@ -10,29 +10,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # - name: Debug
-    #   run: |
-    #     echo "GitHub Workspace: $GITHUB_WORKSPACE"
-    #     ls -la $GITHUB_WORKSPACE
-    #     ssh -i \${{ secrets.SSH_PRIVATE_KEY }} root@host
 
-    # - name: Checkout code
-    #   uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-    # - uses: actions/checkout@v3
-    # - name: Install Node.js
-    #   uses: actions/setup-node@v3
-    #   with:
-    #     node-version: '16.x'
+    - uses: actions/checkout@v3
+    - name: Install Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16.x'
 
-    # - name: Install npm dependencies
-    #   run: npm install
+    - name: Install npm dependencies
+      run: npm install
 
-    # - name: Run build task
-    #   run: npm run build --if-present
+    - name: Run build task
+      run: npm run build --if-present
 
-    # - name: Copy files to Droplet
-    #   run: scp -r -i ${{ secrets.SSH_PRIVATE_KEY }} ./build/* <USERNAME>@<DROPLET_IP_ADDRESS>:/var/www/html/
+    - name: see the directory
+      run: |
+        cd ./build
+        ls
 
     # - name: Restart Apache
     #   run: ssh -i ${{ secrets.SSH_PRIVATE_KEY }} root@143.110.146.79 "ls"
@@ -47,17 +44,17 @@ jobs:
     #     script: |
     #       ls
 
-      - name: Deploy to Staging server
-        uses: easingthemes/ssh-deploy@main
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          # SOURCE: "./build/"
-          REMOTE_HOST: 143.110.146.79
-          REMOTE_USER: root
-          # TARGET: /var/www/test/
-          # EXCLUDE: "/dist/, /node_modules/"
-          SCRIPT_BEFORE: |
-            whoami
-          SCRIPT_AFTER: |
-            cd /var/www/html/
-            pwd
+    # - name: Deploy to Staging server
+    #   uses: easingthemes/ssh-deploy@main
+    #   env:
+    #     SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+    #     # SOURCE: "./build/"
+    #     REMOTE_HOST: 143.110.146.79
+    #     REMOTE_USER: root
+    #     # TARGET: /var/www/test/
+    #     # EXCLUDE: "/dist/, /node_modules/"
+    #     SCRIPT_BEFORE: |
+    #       whoami
+    #     SCRIPT_AFTER: |
+    #       cd /var/www/html/
+    #       pwd
