@@ -58,7 +58,5 @@ jobs:
           # EXCLUDE: "/dist/, /node_modules/"
           SCRIPT_BEFORE: |
             whoami
-            ls -al
           SCRIPT_AFTER: |
-            whoami
-            ls -al
+            ls
