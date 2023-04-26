@@ -97,6 +97,12 @@ jobs:
     - name: Activate virtual environment
       run: source venv/bin/activate
 
+    - name: check if django fetched or not
+      run: |
+      python3 
+      import django
+      django.VERSION
+
     # - name: Install dependencies
     #   run: pip install -r requirements.txt
 
