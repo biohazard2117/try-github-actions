@@ -17,6 +17,14 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: venv
+        key: ${{ runner.os }}-venv-${{ hashFiles('requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-venv-
+
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
@@ -34,13 +42,6 @@ jobs:
     - name: Install dependencies
       run: pip install -r requirements.txt
 
-    - name: Cache dependencies
-      uses: actions/cache@v3
-      with:
-        path: venv
-        key: ${{ runner.os }}-venv-${{ hashFiles('requirements.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-venv-
 
   # lint:
   #   runs-on: ubuntu-latest
@@ -76,7 +77,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     needs: [install]
-
+    env: 
+      PYTHONPATH: "./venv/bin"
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
