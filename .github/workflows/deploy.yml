@@ -99,9 +99,9 @@ jobs:
 
     - name: check if django fetched or not
       run: |
-      python3 
-      import django
-      django.VERSION
+        python3 
+        import django
+        django.VERSION
 
     # - name: Install dependencies
     #   run: pip install -r requirements.txt
