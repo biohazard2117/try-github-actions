@@ -94,7 +94,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-venv-
     
-    -name: checking the directory
+    - name: checking the directory
       run: |
         pwd 
         ls
