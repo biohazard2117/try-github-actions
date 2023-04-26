@@ -93,22 +93,23 @@ jobs:
         key: ${{ runner.os }}-venv-${{ hashFiles('requirements.txt') }}
         restore-keys: |
           ${{ runner.os }}-venv-
+    
+    -name: checking the directory
+      run: |
+        pwd 
+        ls
 
     - name: Activate virtual environment
       run: source venv/bin/activate
 
-    - name: check if django fetched or not
-      run: |
-        python3 
-        import django
-        django.VERSION
-
-    # - name: Install dependencies
-    #   run: pip install -r requirements.txt
+    - name: Install dependencies
+      run: pip install -r requirements.txt
 
     - name: Make log files folder 
       run: mkdir log_files
+
+    # - name: Add Python and Django to PATH
+    #   run: echo 'export PATH="$PATH:/path/to/venv/bin:/path/to/venv/lib/python3.9/site-packages/django/bin"' >> $GITHUB_ENV
       
     - name: Build project
-      run: |
-        python manage.py check
+      run: python3 manage.py check
