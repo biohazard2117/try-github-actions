@@ -112,7 +112,7 @@ jobs:
     #   run: echo 'export PATH="$PATH:/venv/bin:/venv/lib/python3.9/site-packages/django/bin"' >> $GITHUB_ENV
 
     - name: Set up environment
-      run: echo "::set-env name=PYTHONPATH::.:/github/workspace"
+      run: echo "PYTHONPATH=.:/github/workspace" >> $GITHUB_ENV
 
     - name: Activate virtual environment
       run: source venv/bin/activate
