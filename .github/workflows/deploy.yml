@@ -17,13 +17,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Cache dependencies
-      uses: actions/cache@v3
-      with:
-        path: venv
-        key: ${{ runner.os }}-venv-${{ hashFiles('requirements.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-venv-
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -42,6 +35,13 @@ jobs:
     - name: Install dependencies
       run: pip install -r requirements.txt
 
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: venv
+        key: ${{ runner.os }}-venv-${{ hashFiles('requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-venv-
 
   # lint:
   #   runs-on: ubuntu-latest
@@ -78,7 +78,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [install]
     env: 
-      PYTHONPATH: "./venv/bin"
+      PYTHONPATH: ".:/github/workspace"
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -101,8 +101,6 @@ jobs:
     #     pwd 
     #     ls
 
-    - name: Activate virtual environment
-      run: source venv/bin/activate
 
     # - name: Install dependencies
     #   run: pip install -r requirements.txt
@@ -110,8 +108,14 @@ jobs:
     - name: Make log files folder 
       run: mkdir log_files
 
-    - name: Add Python and Django to PATH
-      run: echo 'export PATH="$PATH:/venv/bin:/venv/lib/python3.9/site-packages/django/bin"' >> $GITHUB_ENV
+    # - name: Add Python and Django to PATH
+    #   run: echo 'export PATH="$PATH:/venv/bin:/venv/lib/python3.9/site-packages/django/bin"' >> $GITHUB_ENV
+
+    - name: Set up environment
+      run: echo "::set-env name=PYTHONPATH::.:/github/workspace"
+
+    - name: Activate virtual environment
+      run: source venv/bin/activate
       
     - name: Build project
       run: python3 manage.py check
