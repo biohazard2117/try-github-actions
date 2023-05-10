@@ -45,4 +45,4 @@ jobs:
           source: "manage.py"
           target: /root/test/
           script: |
-          pwd
+            pwd 
