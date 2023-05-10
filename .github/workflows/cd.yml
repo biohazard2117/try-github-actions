@@ -34,7 +34,7 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v0.1.4
+      - uses: actions/checkout@v3
       - name: copy file via ssh password
         uses: appleboy/scp-action@v0.1.4
         with:
