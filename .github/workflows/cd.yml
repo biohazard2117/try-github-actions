@@ -15,7 +15,7 @@ on:
     branches:
       - main
   workflow_dispatch:
-  
+
 jobs:
   build: 
     # name: Build
@@ -34,13 +34,13 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v0.1.4
-    - name: copy file via ssh password
-      uses: appleboy/scp-action@v0.1.4
-      with:
-          host: 134.122.64.201
-          username: root
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-        port: 22
-        source: "manage.py"
-        target: /root/test/
+      - uses: actions/checkout@v0.1.4
+      - name: copy file via ssh password
+        uses: appleboy/scp-action@v0.1.4
+        with:
+            host: 134.122.64.201
+            username: root
+            key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          source: "manage.py"
+          target: /root/test/
