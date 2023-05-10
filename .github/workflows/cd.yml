@@ -1,0 +1,46 @@
+name: Deploy current code 
+
+# on:
+#   workflow_run:
+#     workflows: ["Validation_Gauntlet"]
+#     types:
+#       - completed
+#   workflow_dispatch:
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  
+jobs:
+  build: 
+    # name: Build
+    # runs-on: ubuntu-latest
+    # steps:
+    #   - name: SSH into Droplet & Git pull & restart Droplet
+    #     uses: appleboy/ssh-action@v0.1.8
+    #     with:
+    #       host: 134.122.64.201
+    #       username: root
+    #       key: ${{ secrets.SSH_PRIVATE_KEY }}
+    #       port: 22
+    #       script: |
+    #         ls
+    #         pwd
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v0.1.4
+    - name: copy file via ssh password
+      uses: appleboy/scp-action@v0.1.4
+      with:
+          host: 134.122.64.201
+          username: root
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: 22
+        source: "manage.py"
+        target: /root/test/
