@@ -5,15 +5,16 @@ COPY requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Mounts the application code to the image
-COPY . code
-WORKDIR /code
+COPY . backend
+WORKDIR /backend
 
 # migrate the changes
-RUN python manage.py migrate
+# RUN python manage.py migrate
 
 # collect all the static files 
 RUN python manage.py collectstatic --no-input
 
+# making port 8000 available for communication with the container
 EXPOSE 8000
 
 # runs the production server

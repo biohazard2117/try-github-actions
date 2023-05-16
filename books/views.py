@@ -21,11 +21,11 @@ class BookViewSet(viewsets.ModelViewSet):
     def retrieve(self, request):
         # serializer_class = BookSerializer
         
-        # book_id = request.data["book_id"]
-        queryset = self.get_queryset()
-        # book = Book.objects.filter(id = book_id)
-        serializer = self.serializer_class(queryset, many = True)
-        # print(serializer.data)
+        book_id = request.data["book_id"]
+        # queryset = self.get_queryset()
+        book = Book.objects.all()
+        serializer = self.serializer_class(book, many = True)
+        print(serializer.data)
         
         return Response({"success": "Book found", "data": serializer.data}, status=status.HTTP_200_OK)
 
